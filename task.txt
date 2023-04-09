@@ -1,0 +1,7 @@
+✅ ❌
+
+- data permohonan karyawan di izin kasi hilang tabel biaya ✅
+- di tabel kasbon kasi hilang tabel tanggal mulai dan tabel tanggal selesai  ✅
+- Slip gaji tabel total pinjaman di ambil dari pengajuan pinjaman karyawan 
+  yg Sdh di setujui oleh Admin ✅
+- button cetak ke pdf, button download ke excel. 
