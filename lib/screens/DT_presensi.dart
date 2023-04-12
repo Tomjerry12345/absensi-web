@@ -137,8 +137,6 @@ class _PresensiState extends State<Presensi> {
 
     data?.docs.forEach((e) {
       final tanggal = e["tanggal"];
-      final waktuDatang = e["waktu_datang"];
-      final waktuPulang = e["waktu_pulang"];
 
       row++;
 
@@ -153,10 +151,10 @@ class _PresensiState extends State<Presensi> {
           .value = "${tanggal["hari"]}/${tanggal["bulan"]}/${tanggal["tahun"]}";
       sheet
           .cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: row))
-          .value = "${waktuDatang["jam"]}:${waktuDatang["menit"]}";
+          .value = e["view_waktu_datang"];
       sheet
           .cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: row))
-          .value = "${waktuPulang["jam"]}:${waktuPulang["menit"]}";
+          .value = e["view_waktu_datang"];
       sheet
           .cell(CellIndex.indexByColumnRow(columnIndex: 5, rowIndex: row))
           .value = e["keterangan_waktu_pulang"];
@@ -282,8 +280,6 @@ class _PresensiState extends State<Presensi> {
                     document.data() as Map<String, dynamic>;
 
                 Map<String, dynamic> tanggal = data["tanggal"];
-                Map<String, dynamic> waktuDatang = data["waktu_datang"];
-                Map<String, dynamic> waktuPulang = data["waktu_pulang"];
 
                 return pw.TableRow(
                   children: [
@@ -303,12 +299,12 @@ class _PresensiState extends State<Presensi> {
                         style: const pw.TextStyle(
                           fontSize: 12,
                         )),
-                    pw.Text("${waktuDatang["jam"]}:${waktuDatang["menit"]}",
+                    pw.Text(data["view_waktu_datang"],
                         textAlign: pw.TextAlign.center,
                         style: const pw.TextStyle(
                           fontSize: 12,
                         )),
-                    pw.Text("${waktuPulang["jam"]}:${waktuPulang["menit"]}",
+                    pw.Text(data["view_waktu_pulang"],
                         textAlign: pw.TextAlign.center,
                         style: const pw.TextStyle(
                           fontSize: 12,
@@ -452,6 +448,7 @@ class _PresensiState extends State<Presensi> {
                       });
                     },
                     decoration: InputDecoration(
+                        hintText: "test",
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Warna.hijau2,
@@ -496,7 +493,7 @@ class _PresensiState extends State<Presensi> {
                       ],
                       rows: l!.map((e) {
                         var t = e["tanggal"];
-                        var wd = e["waktu_datang"];
+                        ;
                         var wp = e["waktu_pulang"];
                         var date = "${t["hari"]}/${t["bulan"]}/${t["tahun"]}";
                         rowNumber++;
@@ -504,12 +501,8 @@ class _PresensiState extends State<Presensi> {
                           DataCell(Text(rowNumber.toString())),
                           DataCell(Text(e["nama"])),
                           DataCell(Text(date)),
-                          DataCell(Text(wd.toString() == "{}"
-                              ? "-"
-                              : "${wd["jam"]}:${wd["menit"]}")),
-                          DataCell(Text(wp.toString() == "{}"
-                              ? "-"
-                              : "${wp["jam"]}:${wp["menit"]}")),
+                          DataCell(Text(e["view_waktu_datang"])),
+                          DataCell(Text(e["view_waktu_pulang"])),
                           DataCell(Text(e["keterangan_waktu_pulang"])),
                           DataCell(Text(e["durasi"].toString())),
                           DataCell(Text(e["lembur"].toString())),
